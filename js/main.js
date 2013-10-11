@@ -28,6 +28,8 @@
 			// 	event.preventDefault();
 			// 	$('.gform_button').click();
 			// });
+
+			$("select").selecter();
 		},
 
 

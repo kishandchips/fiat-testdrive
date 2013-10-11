@@ -10,6 +10,7 @@
 
 			wp_enqueue_script('modernizr', get_template_directory_uri().'/js/libs/modernizr.min.js');
 			wp_enqueue_script('jquery', get_template_directory_uri().'/js/libs/jquery.min.js');
+			wp_enqueue_script('selecter', get_template_directory_uri().'/js/plugins/jquery.fs.selecter.min.js');
 			wp_enqueue_script('main', get_template_directory_uri().'/js/main.js', array('jquery'), '', true);
 		}
 		add_action('wp_enqueue_scripts', 'load_assets');
