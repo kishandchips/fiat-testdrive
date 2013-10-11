@@ -537,7 +537,7 @@ menu, ol, ul {
 }
 
 .container {
-	width: 630px;
+	max-width: 630px;
 	margin-left: auto;
 	margin-right: auto;
 	position: relative;
@@ -546,8 +546,8 @@ menu, ol, ul {
 
 	 @include device-width(7){
 	 	width: auto;
-	 	padding-left: 2em;
-	 	padding-right: 2em;
+	 	margin-left: 2em;
+	 	margin-right: 2em;
 	 }
 }
 
@@ -859,9 +859,17 @@ $total_columns: length($columns);
 		text-transform: uppercase;
 	}
 
+	#gforms_confirmation_message {
+		text-transform: uppercase;
+		color: green;
+		font-weight: bold;
+		@include font-size(20);
+		text-align: center;		
+	}
+
 	.gform_footer {
 		display:block;
-		width: 102px;
+		width: 107px;
 		position: relative;
 		padding: 0;
 		margin: 16px auto;
@@ -887,7 +895,7 @@ $total_columns: length($columns);
 
 		.submit_button, .gform_button {
 			@include avenir-medium;
-			@include font-size(15);
+			font-size: 15px !important;
 			height: 36px;
 			line-height: 36px;
 			color: #FFF;

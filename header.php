@@ -35,4 +35,4 @@
 			</div>
 		</header><!-- #masthead -->
 		<div id="main" role="main">
-			<div class="bg-montage"></div>
+			<div class="bg-montage hide-on-mobile"></div>

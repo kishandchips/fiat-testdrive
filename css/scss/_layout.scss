@@ -1,7 +1,7 @@
 html {
 	height: 100%;
 	font-size: 62.5%;
-	
+
 	@include device-width(10) {
 		font-size: 61%;
 	}
@@ -34,10 +34,9 @@ html {
 body {
 	@include avenir-medium;
 	height: 100%;
-	background: #FFF;
 	color: #333;
 	@include font-size(14);
-	// -webkit-font-smoothing: antialiased;
+	// -webkit-font-smoothing: antialiased;	
 }
 
 #header {
@@ -65,35 +64,98 @@ body {
 		}
 	}
 }
-#main {
+
+#wrap {
 	position: relative;
+	overflow: hidden;
 
-	.bg-montage {
+	.bg-bottom {
+		height: 40%;
 		position: absolute;
-		height: 282px;
+		bottom: 0;
+		z-index: -1;
 		width: 100%;
-		background: url('../images/backgrounds/montage.jpg') center center no-repeat;
-		z-index: 0;
-		top: 20%;
+		background-color: #ffffff; // Old browsers
+		@include filter-gradient(#ffffff, #f2f2f2, vertical); // IE6-9
+		@include background-image(linear-gradient(top,  #ffffff 0%,#ffffff 5%,#f2f2f2 7%,#f2f2f2 100%));		
+
+		
+		.inner {
+			position: relative;
+			height:100%;
+
+			.car-left {
+				position: absolute;
+				left: -15%;
+				top: -10%;
+				width: 37%;
+				height: 37%;
+				background-image: url('../images/backgrounds/car-bottom-left.png');
+				background-size: contain;
+				background-repeat: no-repeat;
+
+			}
+
+			.car-right {
+				position: absolute;
+				right: 0;
+				bottom: 55px;
+				width: 43%;
+				height: 53%;
+				background: url('../images/backgrounds/car-bottom-right.png');
+				background-size: contain;
+				background-repeat: no-repeat;
+				background-position: right bottom;
+			}				
+		}
 	}
 
-	#page {
-		border-bottom: 5px solid #333333;		
-		box-shadow: 6px 0px 5px -5px #999, -6px 0px 5px -5px #999;
-		margin-bottom: 140px;
+	#main {
+		position: relative;
 
-		#content {
-			background: #FFF;
+		.bg-montage {
+			position: absolute;
+			height: 282px;
+			width: 100%;
+			background: url('../images/backgrounds/montage.jpg') center center no-repeat;
+			z-index: 0;
+			top: 20%;
+		}
 
-			.header-image {
-				img {
-					display: block;
+		#page {
+			border-bottom: 5px solid #333333;		
+			box-shadow: 6px 0px 5px -5px #999, -6px 0px 5px -5px #999;
+			margin-bottom: 140px;
+
+			#content {
+				background: #FFF;
+
+				.header-image {
+					img {
+						display: block;
+					}
 				}
-			}
 
-			.inner {
-				padding: 0 30px;
-			}
-		}			
+				.inner {
+					padding: 0 30px;
+				}
+			}			
+		}
 	}
+		
+	#footer {
+		padding: 20px;
+		@include box-shadow(-2px -2px 3px #C6C6C6);
+		background: #FFF;
+
+		.container {
+			max-width: 900px;
+
+			@include device-width(9) {
+				width: 100%;
+			}
+		}
+	}	
 }
+
+

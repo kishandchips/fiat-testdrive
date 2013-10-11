@@ -14,7 +14,7 @@
 						</div>
 					</div>
 				<?php endif; ?>	
-				<div class="inner">
+				<div class="inner clearfix">
 					<?php the_content(); ?>	
 				</div>
 			<?php endwhile; ?>
