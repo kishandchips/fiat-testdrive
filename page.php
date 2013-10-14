@@ -1,5 +1,6 @@
-<?php get_header(); ?>
-
+<?php $ajax = (isset($_GET['ajax']) && $_GET['ajax'] == true) ? true : false;
+if(!$ajax) get_header(); ?>
+<?php if($ajax): ?><button class="close-button"></button><?php endif; ?>
 	<div id="page" class="container clearfix">
 		<div id="content" class="row">
 			<?php while ( have_posts() ) : the_post(); ?>
@@ -13,11 +14,17 @@
 							<img src="<?php echo $header_image[0]; ?>" alt="">
 						</div>
 					</div>
-				<?php endif; ?>	
+				<?php endif; ?>
+				<?php if ( get_field('explanation')) :?>
+					<div class="top-message clearfix" id="start">
+						<p><?php the_field('explanation')?></p>
+					</div>
+				<?php endif; ?>
 				<div class="inner clearfix">
 					<?php the_content(); ?>	
 				</div>
 			<?php endwhile; ?>
 		</div><!-- #content -->
 	</div><!-- #page -->
-<?php get_footer(); ?>
+<?php $ajax = (isset($_GET['ajax']) && $_GET['ajax'] == true) ? true : false;
+if(!$ajax) get_footer(); ?>

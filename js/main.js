@@ -7,7 +7,7 @@
 			$('a[href^=#].scroll-to-btn').click(function(){
 				var target = $($(this).attr('href'));
 				var offsetTop = (target.length != 0) ? target.offset().top : 0;
-				//$('body, html').animate({scrollTop: offsetTop}, 500, 'easeInOutQuad');
+				$('html,body').animate({scrollTop: offsetTop},'slow');
 				return false;
 			});
 
@@ -21,13 +21,8 @@
 				}
 			});
 
-			$('.selectbox.petrol').append('<span data-icon="1" class="icon"></span>');
-			$('.selectbox.gear').append('<span data-icon="2" class="icon"></span>');
-			// $('.gform_footer').prepend('<a class="submit_button">Submit</a>');	
-			// $('.submit_button').on('click', function(event) {
-			// 	event.preventDefault();
-			// 	$('.gform_button').click();
-			// });
+			$('.selectbox.petrol').append('<span data-icon="2" class="icon"></span>');
+			$('.selectbox.gear').append('<span data-icon="1" class="icon"></span>');
 
 			$("select").selecter();
 		},
@@ -36,6 +31,7 @@
 		loaded: function(){
 			// $('.row .container').eqHeights();
 			this.setBoxSizing();
+			this.ajaxPage.init();
 		},
 
 		setBoxSizing: function(){
@@ -53,6 +49,116 @@
 		    }
 		},		
 
+		ajaxPage: {
+			init: function(){
+				main.ajaxPage.container = $('#ajax-page');
+				pageUrl = main.ajaxPage.pageUrl = window.location.href;
+
+				main.ajaxPage.scrollPosition = 0;
+				$('.ajax-btn').unbind('click');
+				$(document).on('click', '.ajax-btn', function(e){
+					if($(this).hasClass('no-scroll')) {
+						main.ajaxPage.scrollPosition = 0;
+					} else {
+						main.ajaxPage.scrollPosition = $(this).offset().top;
+					}
+					// console.log(main.ajaxPage.scrollPosition);
+					e.preventDefault();
+					main.ajaxPage.load($(this).attr('href'));
+					$('html, body').delay(1000).animate({scrollTop: main.ajaxPage.scrollPosition}, 300);
+				});
+
+				$(document).on('click', '#ajax-page .close-button', function() {
+					main.ajaxPage.close();
+				});								
+			},
+
+			close: function(){
+				$('#ajax-page').slideUp(function(){
+					main.ajaxPage.container.html('');
+				});
+				$('html, body').animate({scrollTop: main.ajaxPage.scrollPosition}, 300);
+
+				if(Modernizr.history) {
+					var url = baseUrl;
+					history.pushState({page:url}, url, url);
+				}								
+			},
+
+			load: function(url){
+
+				var container = main.ajaxPage.container,
+					ajaxUrl = main.ajaxUrl(url);
+
+			    if(Modernizr.history) history.pushState(null, null, url);
+
+			    container.slideDown('2000');
+			    $('html, body').animate({scrollTop: container.offset().top}, 800, 'easeInOutQuad');
+			    if($('.content', container).length == 0){
+
+					loader = $('<div class="loader"></div>').hide();
+					container.append(loader);
+					container.delay(200).animate({height: loader.actual('outerHeight')}, function(){
+						loader.fadeIn();
+
+						$.get(ajaxUrl, function(data) {
+							var content = $('<div class="content"></div>').hide();
+
+							container.html(content);
+							content.html(data);
+							loader.fadeOut(function(){
+								if($.fn.imagesLoaded){
+									content.imagesLoaded(function(){
+										container.animate({'height': content.height()}, function(){
+											container.css({'height': 'auto'});
+											content.fadeIn();
+											container.slideDown('slow');
+										});
+									});
+								} else {
+									container.animate({'height': content.actual('height')}, function(){
+										container.css({'height': 'auto'});
+										content.fadeIn();
+									});
+								}	
+							});
+
+						});
+					});
+				} else {
+					var content = $('.content', container),
+						loader = $('<div class="loader"></div>').hide();
+					container.prepend(loader);
+					content.fadeTo(300, 0, function(){
+						loader.fadeIn();
+						$.get(ajaxUrl, function(data) {
+							content.html(data);
+							loader.fadeOut(function(){
+								container.animate({'height': content.actual('height')}, function(){
+									content.fadeTo(300, 1);
+									container.css({'height': 'auto'});
+								});
+							});
+						});
+					});
+				}
+			}
+		},
+
+		ajaxUrl: function(url){
+			var regex = new RegExp('(\\?|\\&)ajax=.*?(?=(&|$))'),
+		        qstring = /\?.+$/;
+
+			if (regex.test(url)){
+		        ajaxUrl = url.replace(regex, '$1ajax=true');
+		    } else if (qstring.test(url)) {
+		        ajaxUrl = url + '&ajax=true';
+		    } else {
+		        ajaxUrl =  url + '?ajax=true';
+		    }
+
+		    return ajaxUrl;		
+		},		
 		
 		resize: function(){
 		}
