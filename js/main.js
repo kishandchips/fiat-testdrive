@@ -60,7 +60,7 @@
 					if($(this).hasClass('no-scroll')) {
 						main.ajaxPage.scrollPosition = 0;
 					} else {
-						main.ajaxPage.scrollPosition = $(this).offset().top;
+						main.ajaxPage.scrollPosition = main.ajaxPage.container.offset().top;
 					}
 					// console.log(main.ajaxPage.scrollPosition);
 					e.preventDefault();

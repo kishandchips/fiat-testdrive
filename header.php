@@ -2,6 +2,7 @@
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
 	<meta name="viewport" content="width=device-width" />
+	<meta name="format-detection" content="telephone=no">
 	<title><?php wp_title( '|', true, 'right' ); ?></title>
 	<link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/favicon.ico" />     
 	<?php 
@@ -44,4 +45,4 @@
 			</div>
 		</header><!-- #masthead -->
 		<div id="main" role="main">
-			<div class="bg-montage hide-on-mobile"></div>
+			<div class="bg-montage"></div>

@@ -1,8 +1,8 @@
 	</div><!-- #main -->
 	<div class="bg-bottom">
 		<div class="inner">
-			<div class="car-left hide-on-mobile"></div>
-			<div class="car-right hide-on-mobile"></div>
+			<div class="car-left"></div>
+			<div class="car-right"></div>
 		</div>
 	</div>	
 </div><!-- .wrap-inner -->

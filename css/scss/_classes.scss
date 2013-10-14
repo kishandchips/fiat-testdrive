@@ -692,12 +692,21 @@ $total_columns: length($columns);
 	    color: #96172e;
 	}	
 
+	input[type=submit] {
+	    -webkit-appearance: none;
+	    border-radius: 0;		
+	}
+
 	input[type=text], input[type=url], input[type=email], input[type=tel], input[type=number], input[type=password] {
 		border: 1px solid #aaaaaa;
 		height: 30px;
 		color: #333333;
 		@include box-sizing(border-box);
 		padding: 0 10px;
+	    -webkit-appearance: none;
+	    border-radius: 0;
+	    -webkit-appearance: none;
+	    border-radius: 0;	    
 	}
 
 	input[type="radio"]:checked+label, input[type="checkbox"]:checked+label {
@@ -880,6 +889,10 @@ $total_columns: length($columns);
 		position: relative;
 		padding: 0;
 		margin: 16px auto;
+
+		@include device-width(5) {
+			width: 105px;
+		}
 
 		&:after {
 			left: 100%;
