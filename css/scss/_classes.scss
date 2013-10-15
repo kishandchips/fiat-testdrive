@@ -923,7 +923,7 @@ $total_columns: length($columns);
 			padding: 0 10px;
 			border: none;
 			text-transform: uppercase;
-			padding: 0 25px;
+			padding: 0 25px !important;
 		}
 
 		&:hover {
@@ -939,7 +939,7 @@ $total_columns: length($columns);
 	}
 }
 
-	.selecter-element { *left: -999999px; position: absolute; opacity: 0; }
+	.selecter-element { *left: -999999px; position: absolute; opacity: 0; display: none; }
 
 	.selecter {
 		display: block;

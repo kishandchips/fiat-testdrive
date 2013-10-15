@@ -18,8 +18,11 @@
 		}
 		add_action('wp_enqueue_scripts', 'load_assets');
 	?>
-	<!--[if lt IE 8]> <script src="<?php bloginfo('template_url')?>/js/lte-ie7.js"></script> <![endif]-->
 	<?php wp_head(); ?>
+	<!--[if lt IE 8]> <script src="<?php bloginfo('template_url')?>/js/lte-ie7.js"></script> <![endif]-->
+	<!--[if IE]>
+	<link rel="stylesheet" type="text/css" href="<?php bloginfo('template_url')?>/css/ie.css" />
+	<![endif]-->
     <script type="text/javascript">
 		var themeUrl = '<?php bloginfo( 'template_url' ); ?>';
 		var baseUrl = '<?php bloginfo( 'url' ); ?>';
