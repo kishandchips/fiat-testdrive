@@ -35,7 +35,6 @@
 	background-color: #f0f0f0;
 }
 
-
 a {
 	text-decoration: none;
 	color: #000000;
@@ -52,8 +51,6 @@ h2 {
 	@include avenir-medium;
 	font-size: 3.5em;
 }
-
-
 
 h3 {
 	@include avenir-regular;
@@ -90,7 +87,6 @@ pre {
 	@include border-radius(3em);
 	padding: 1em 1em 0.5em;
 	width: 90%;
-	behavior: url(/wordpress/wp-content/themes/twistkey/pie/PIE.htc);
 	position: relative;
 	span {
 		line-height: 0.7em;

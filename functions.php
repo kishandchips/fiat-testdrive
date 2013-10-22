@@ -45,3 +45,48 @@ if ( ! function_exists( 'custom_tinymce_options' )) {
 }
 
 add_image_size( 'header_image', 630, 323, true);
+
+add_action('gform_after_submission', 'generate_xml', 10, 2);
+function generate_xml($entry, $form) {
+
+	$xml_string = '<?xml version="1.0" encoding="UTF-8"?>
+			<TestDriveBookingFiat>
+				<UniqueFormID>'.$entry['id'].'</UniqueFormID>
+				<Title>'.$entry['2'].'</Title>
+				<FirstName>'.$entry['3'].'</FirstName>
+				<LastName>'.$entry['4'].'</LastName>
+				<Companyname>'.$entry['6'].'</Companyname>
+				<CompanyAddress1>'.$entry['7'].'</CompanyAddress1>
+				<CompanyAddress2>'.$entry['8'].'</CompanyAddress2>
+				<CompanyAddress3>'.$entry['9'].'</CompanyAddress3>
+				<CompanyAddress4>'.$entry['10'].'</CompanyAddress4>
+				<CompanyPostCode>'.$entry['11'].'</CompanyPostCode>
+				<EmailAddress>'.$entry['12'].'</EmailAddress>
+				<TelephoneNumber>'.$entry['13'].'</TelephoneNumber>
+				<MobileNumber>'.$entry['14'].'</MobileNumber>
+				<Model>'.$entry['15'].'</Model>
+				<FuelType>'.$entry['16'].'</FuelType>
+				<TypeofGearBox>'.$entry['17'].'</TypeofGearBox>
+				<CurrentCarRegistrationNumber>'.$entry['18'].'</CurrentCarRegistrationNumber>
+			</TestDriveBookingFiat>
+	';
+	// return $xml;
+	$uploads = wp_upload_dir();
+	$location = $uploads['basedir'].'/bookings/entry_'.$entry['id'].'.xml';
+	$xml = new SimpleXMLElement($xml_string);
+	$xml->asXml($location);
+
+	$xml_file = fopen($location, 'r');
+	
+	$curl = curl_init();
+ 	curl_setopt($curl, CURLOPT_URL, 'ftp://Fiat:34Solution@176.35.225.193/WebEnquiry/entry_'.$entry['id'].'.xml');
+ 	curl_setopt($curl, CURLOPT_UPLOAD, 1);
+ 	curl_setopt($curl, CURLOPT_HTTPHEADER, Array("Content-Type: text/xml")); 
+ 	curl_setopt($curl, CURLOPT_PUT, 1);
+ 	curl_setopt($curl, CURLOPT_INFILESIZE, filesize($location));
+ 	curl_setopt($curl, CURLOPT_INFILE, $xml_file);
+
+ 	$result = curl_exec($curl);
+ 	$error_no = curl_errno($curl);
+ 	curl_close($curl);
+}
