@@ -50,25 +50,27 @@ add_action('gform_after_submission', 'generate_xml', 10, 2);
 function generate_xml($entry, $form) {
 
 	$xml_string = '<?xml version="1.0" encoding="UTF-8"?>
-			<TestDriveBookingFiat>
-				<UniqueFormID>'.$entry['id'].'</UniqueFormID>
-				<Title>'.$entry['2'].'</Title>
-				<FirstName>'.$entry['3'].'</FirstName>
-				<LastName>'.$entry['4'].'</LastName>
-				<Companyname>'.$entry['6'].'</Companyname>
-				<CompanyAddress1>'.$entry['7'].'</CompanyAddress1>
-				<CompanyAddress2>'.$entry['8'].'</CompanyAddress2>
-				<CompanyAddress3>'.$entry['9'].'</CompanyAddress3>
-				<CompanyAddress4>'.$entry['10'].'</CompanyAddress4>
-				<CompanyPostCode>'.$entry['11'].'</CompanyPostCode>
-				<EmailAddress>'.$entry['12'].'</EmailAddress>
-				<TelephoneNumber>'.$entry['13'].'</TelephoneNumber>
-				<MobileNumber>'.$entry['14'].'</MobileNumber>
-				<Model>'.$entry['15'].'</Model>
-				<FuelType>'.$entry['16'].'</FuelType>
-				<TypeofGearBox>'.$entry['17'].'</TypeofGearBox>
-				<CurrentCarRegistrationNumber>'.$entry['18'].'</CurrentCarRegistrationNumber>
-			</TestDriveBookingFiat>
+	<TestDriveBookingsFiat>
+		<TestDriveBookingFiat>
+			<UniqueFormID>'.$entry['id'].'</UniqueFormID>
+			<Title>'.$entry['2'].'</Title>
+			<FirstName>'.$entry['3'].'</FirstName>
+			<LastName>'.$entry['4'].'</LastName>
+			<Companyname>'.$entry['6'].'</Companyname>
+			<CompanyAddress1>'.$entry['7'].'</CompanyAddress1>
+			<CompanyAddress2>'.$entry['8'].'</CompanyAddress2>
+			<CompanyAddress3>'.$entry['9'].'</CompanyAddress3>
+			<CompanyAddress4>'.$entry['10'].'</CompanyAddress4>
+			<CompanyPostCode>'.$entry['11'].'</CompanyPostCode>
+			<EmailAddress>'.$entry['12'].'</EmailAddress>
+			<TelephoneNumber>'.$entry['13'].'</TelephoneNumber>
+			<MobileNumber>'.$entry['14'].'</MobileNumber>
+			<Model>'.$entry['15'].'</Model>
+			<FuelType>'.$entry['16'].'</FuelType>
+			<TypeofGearBox>'.$entry['17'].'</TypeofGearBox>
+			<CurrentCarRegistrationNumber>'.$entry['18'].'</CurrentCarRegistrationNumber>
+		</TestDriveBookingFiat>
+	</TestDriveBookingsFiat>
 	';
 	// return $xml;
 	$uploads = wp_upload_dir();
