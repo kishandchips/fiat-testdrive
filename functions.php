@@ -62,9 +62,10 @@ function generate_xml($entry, $form) {
 			<CompanyAddress3>'.$entry['9'].'</CompanyAddress3>
 			<CompanyAddress4>'.$entry['10'].'</CompanyAddress4>
 			<CompanyPostCode>'.$entry['11'].'</CompanyPostCode>
-			<EmailAddress>'.$entry['12'].'</EmailAddress>
+			<EmailAddress>'.$entry['21'].'</EmailAddress>
 			<TelephoneNumber>'.$entry['13'].'</TelephoneNumber>
 			<MobileNumber>'.$entry['14'].'</MobileNumber>
+			<PreferredDate>'.$entry['22'].'</PreferredDate>
 			<Model>'.$entry['15'].'</Model>
 			<FuelType>'.$entry['16'].'</FuelType>
 			<TypeofGearBox>'.$entry['17'].'</TypeofGearBox>
