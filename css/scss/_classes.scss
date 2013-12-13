@@ -779,7 +779,7 @@ $total_columns: length($columns);
 						}					
 					}
 				}
-			}
+			}		
 
 			&.selectbox {
 				border: 1px solid #ececec;
@@ -815,6 +815,17 @@ $total_columns: length($columns);
 					}
 				}				
 			}
+
+			&.information {
+				li {
+					float: left;
+					width: 25%;
+
+					@include device-width(5) {
+						width: 50%;
+					}
+				}
+			}				
 
 			&.input-next-label {
 
@@ -880,6 +891,12 @@ $total_columns: length($columns);
 	.validation_error {
 		text-transform: uppercase;
 	}
+
+	.gfield_description {
+		color: #333;
+		font-style: italic;
+		font-size: 10px;		
+	}	
 
 	#gforms_confirmation_message {
 		text-transform: uppercase;

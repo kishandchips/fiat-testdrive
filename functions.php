@@ -70,9 +70,16 @@ function generate_xml($entry, $form) {
 			<FuelType>'.$entry['16'].'</FuelType>
 			<TypeofGearBox>'.$entry['17'].'</TypeofGearBox>
 			<CurrentCarRegistrationNumber>'.$entry['18'].'</CurrentCarRegistrationNumber>
+			<UseOfData>
+				<Post>'.$entry['23.1'].'</Post>
+				<Telephone>'.$entry['23.2'].'</Telephone>
+				<Email>'.$entry['23.3'].'</Email>
+				<SMS>'.$entry['23.4'].'</SMS>
+			</UseOfData>
 		</TestDriveBookingFiat>
 	</TestDriveBookingsFiat>
 	';
+
 	// return $xml;
 	$uploads = wp_upload_dir();
 	$location = $uploads['basedir'].'/bookings/entry_'.$entry['id'].'.xml';
