@@ -46,6 +46,37 @@ if ( ! function_exists( 'custom_tinymce_options' )) {
 
 add_image_size( 'header_image', 630, 323, true);
 
+add_action("gform_field_standard_settings", "custom_gform_standard_settings", 10, 2);
+function custom_gform_standard_settings($position, $form_id){
+    if($position == 25){
+    	?>
+        <li style="display: list-item; ">
+            <label for="field_placeholder">Placeholder Text</label>
+            <input type="text" id="field_placeholder" size="35" onkeyup="SetFieldProperty('placeholder', this.value);">
+        </li>
+        <?php
+    }
+}
+
+add_action('gform_enqueue_scripts',"custom_gform_enqueue_scripts", 10, 2);
+function custom_gform_enqueue_scripts($form, $is_ajax=false){
+    ?>
+<script>
+    jQuery(function(){
+        <?php
+        foreach($form['fields'] as $i=>$field){
+            if(isset($field['placeholder']) && !empty($field['placeholder'])){
+                ?>
+                jQuery('#input_<?php echo $form['id']?>_<?php echo $field['id']?>').attr('placeholder','<?php echo $field['placeholder']?>');
+                <?php
+            }
+        }
+        ?>
+    });
+    </script>
+    <?php
+}
+
 add_action('gform_after_submission', 'generate_xml', 10, 2);
 function generate_xml($entry, $form) {
 
@@ -70,12 +101,10 @@ function generate_xml($entry, $form) {
 			<FuelType>'.$entry['16'].'</FuelType>
 			<TypeofGearBox>'.$entry['17'].'</TypeofGearBox>
 			<CurrentCarRegistrationNumber>'.$entry['18'].'</CurrentCarRegistrationNumber>
-			<UseOfData>
-				<Post>'.$entry['23.1'].'</Post>
-				<Telephone>'.$entry['23.2'].'</Telephone>
-				<Email>'.$entry['23.3'].'</Email>
-				<SMS>'.$entry['23.4'].'</SMS>
-			</UseOfData>
+			<UseOfDataPost>'.$entry['23.1'].'</UseOfDataPost>
+			<UseOfDataTelephone>'.$entry['23.2'].'</UseOfDataTelephone>
+			<UseOfDataEmail>'.$entry['23.3'].'</UseOfDataEmail>
+			<UseOfDataSMS>'.$entry['23.4'].'</UseOfDataSMS>
 		</TestDriveBookingFiat>
 	</TestDriveBookingsFiat>
 	';
