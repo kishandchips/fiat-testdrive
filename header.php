@@ -5,20 +5,21 @@
 	<meta name="format-detection" content="telephone=no">
 	<title><?php wp_title( '|', true, 'right' ); ?></title>
 	<link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/favicon.ico" />     
+	
 	<?php 
 		function load_assets(){
-			wp_enqueue_style('style', get_template_directory_uri().'/css/style.css');
-
 			wp_enqueue_script('modernizr', get_template_directory_uri().'/js/libs/modernizr.min.js');
 			wp_enqueue_script('jquery', get_template_directory_uri().'/js/libs/jquery.min.js');
 			wp_enqueue_script('easing', get_template_directory_uri().'/js/plugins/jquery.easing.js');
 			wp_enqueue_script('actual', get_template_directory_uri().'/js/plugins/jquery.actual.js', array('jquery'), '', true);		
 			wp_enqueue_script('selecter', get_template_directory_uri().'/js/plugins/jquery.fs.selecter.min.js');
 			wp_enqueue_script('main', get_template_directory_uri().'/js/main.js');
+
+			wp_enqueue_style('style', get_template_directory_uri().'/css/style.css');		
 		}
 		add_action('wp_enqueue_scripts', 'load_assets');
 	?>
-	<?php wp_head(); ?>
+	<?php wp_head(); ?>	
 	<!--[if lt IE 8]> <script src="<?php bloginfo('template_url')?>/js/lte-ie7.js"></script> <![endif]-->
 	<!--[if IE]>
 	<link rel="stylesheet" type="text/css" href="<?php bloginfo('template_url')?>/css/ie.css" />

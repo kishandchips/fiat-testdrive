@@ -703,7 +703,8 @@ $total_columns: length($columns);
 	    border-radius: 0;
 	    -webkit-appearance: none;
 	    border-radius: 0;
-	    font-family: sans-serif;	    
+	    font-family: sans-serif;	
+	    letter-spacing: 1px;    
 	}
 
 	input[type="radio"]:checked+label, input[type="checkbox"]:checked+label {
@@ -725,6 +726,10 @@ $total_columns: length($columns);
 			clear: none;
 			margin: 15px 0;
 
+			&.gfield_error.span {
+				width: 100%;
+			}
+
 			&.car-select {
 				.gfield_radio {
 
@@ -745,6 +750,10 @@ $total_columns: length($columns);
 							font-family: sans-serif;
 						}
 
+						label img {
+							opacity: 0.6;
+						}
+
 						input[type="radio"]+label img {
 							opacity: 0.6;
 							max-width: 100%;
@@ -754,8 +763,9 @@ $total_columns: length($columns);
 							@include device-width(5) {
 								max-width: 99%;
 							}
-
 						}
+
+
 
 						input[type="radio"]:checked+label img, input[type="radio"]:hover+label img{
 							opacity: 1;
@@ -776,7 +786,14 @@ $total_columns: length($columns);
 						input[type="radio"]:checked+label span {
 							font-family: sans-serif;
 							font-weight: bold;
-						}					
+							color: #96172e;
+						}	
+
+						input[type="radio"]+label.selected span {
+							font-family: sans-serif;
+							font-weight: bold;
+							color: #96172e !important;
+						}				
 					}
 				}
 			}		
@@ -970,6 +987,16 @@ $total_columns: length($columns);
 	background: #FFF;
 }
 
+.ui-datepicker {
+	display: none;
+}
+
+.ui-datepicker th {
+	font-family: Arial;
+	text-shadow: none;
+	filter: none;
+}
+
 	.selecter-element { *left: -999999px; position: absolute; opacity: 0; display: none; }
 
 	.selecter {
@@ -1036,9 +1063,10 @@ $total_columns: length($columns);
 			font-size: 13px; 
 			margin: 0; 
 			overflow: hidden; 
-			padding: 8px 10px; 
+			padding: 7px 10px; 
 			text-overflow: ellipsis; 
-			width: 100%; 
+			width: 100%;
+			font-family: Arial; 
 
 			&.selected { 
 				background: #F9F9F9; 

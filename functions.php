@@ -99,7 +99,7 @@ function generate_xml($entry, $form) {
 			<PreferredDate>'.$entry['22'].'</PreferredDate>
 			<Model>'.$entry['15'].'</Model>
 			<FuelType>'.$entry['16'].'</FuelType>
-			<TypeofGearBox>'.$entry['17'].'</TypeofGearBox>
+			<TypeofGearBox>'.$entry['17'] . $entry['24'].'</TypeofGearBox>
 			<CurrentCarRegistrationNumber>'.$entry['18'].'</CurrentCarRegistrationNumber>
 			<UseOfDataPost>'.$entry['23.1'].'</UseOfDataPost>
 			<UseOfDataTelephone>'.$entry['23.2'].'</UseOfDataTelephone>
