@@ -109,7 +109,9 @@ function generate_xml($entry, $form) {
 	</TestDriveBookingsFiat>
 	';
 
-	// return $xml;
+	// return $xml_string;
+	$xml_string = str_replace('&', '&amp;', $xml_string);
+
 	$uploads = wp_upload_dir();
 	$location = $uploads['basedir'].'/bookings/entry_'.$entry['id'].'.xml';
 	$xml = new SimpleXMLElement($xml_string);
@@ -128,4 +130,50 @@ function generate_xml($entry, $form) {
  	$result = curl_exec($curl);
  	$error_no = curl_errno($curl);
  	curl_close($curl);
+
+
+	// Uploading files to Booking sistem FTP at SiSo
+	$credentials = array(
+	        'sisofiatdata14',
+	        'hibhg0zon!$'
+	);
+	$remoteurl = 'https://fiat.siso.co/data_uploads/';
+	$filename = 'entry_'.$entry['id'].'.xml';
+
+
+    if(is_readable($location)){
+    				echo $location;
+    				echo $filename;
+                    $filesize = filesize($location);
+                    $fh = fopen($location, 'rb');
+                   
+                    $ch = curl_init($remoteurl);
+                   
+                    // Set the authentication mode and login credentials
+                    curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
+					curl_setopt($ch, CURLOPT_USERPWD, implode(':', $credentials));                    
+                   
+                    // Execute the request, upload the file
+                    curl_setopt($ch, CURLOPT_URL, $remoteurl.$filename);
+                   
+                    // Define that we are going to upload a file, by setting CURLOPT_PUT we are
+                    // forced to set CURLOPT_INFILE and CURLOPT_INFILESIZE as well.
+                    curl_setopt($ch, CURLOPT_PUT, true);
+                   
+                    curl_setopt($ch, CURLOPT_INFILE, $fh);
+                   
+                    curl_setopt($ch, CURLOPT_INFILESIZE, $filesize);
+                   
+                    curl_setopt($ch, CURLOPT_BINARYTRANSFER, true); // --data-binary
+                   
+                    // Execute the request, upload the file
+                    $success = curl_exec($ch);
+                   
+                    // Close the file handle
+                    fclose($fh);
+                   
+                    return ($success)?"Uploaded":"Error: ".curl_error($ch);               
+    }else{
+                    return "File cannot be opened";
+    }	
 }
