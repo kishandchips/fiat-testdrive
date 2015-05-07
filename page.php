@@ -1,6 +1,25 @@
 <?php $ajax = (isset($_GET['ajax']) && $_GET['ajax'] == true) ? true : false;
 if(!$ajax) get_header(); ?>
 <?php if($ajax): ?><button class="close-button"></button><?php endif; ?>
+
+<?php if(!$ajax): ?> 
+
+	<?php if( have_rows('header_image', 5)  ): ?>
+		<div class="carousel">
+		    <?php while ( have_rows('header_image', 5) ) : the_row(); ?>
+				<div>
+	    	    	<?php
+						$image_size = array('width' => 1680, 'height' => 550);
+						$image_full = get_sub_field('slide', 5);
+						$image = bfi_thumb($image_full, $image_size);    	    	
+					?>
+	    	    	<img src="<?php echo $image; ?>" alt="">
+	    	    </div>
+
+			<?php endwhile; ?>
+		</div>
+	<?php endif; ?>
+<?php endif; ?>
 	<div id="page" class="container clearfix">
 		<div id="content" class="row">
 			<?php while ( have_posts() ) : the_post(); ?>

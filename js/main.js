@@ -1,4 +1,3 @@
-
 ;(function($) {
 
 	window.main = {
@@ -30,11 +29,31 @@
 				$('.gfield_radio li label').removeClass('selected');
 				$('label', this).addClass('selected');
 			});
+
+			$('.carousel').owlCarousel({
+			    animateOut: 'fadeOut',
+			    animateIn: 'fadeIn',				
+			    loop:true,
+			    margin:0,
+			    nav:true,
+			    items: 1,
+			    touchDrag: true,
+			    navText: [,],
+			    autoplay: true,
+				autoplayTimeout:3000,		    
+			    autoplayHoverPause: true,
+			    autoplaySpeed: 1000,
+			    dots: true
+			});	
+
+
+
+
+
 		},
 
 
 		loaded: function(){
-			// $('.row .container').eqHeights();
 			this.setBoxSizing();
 			this.ajaxPage.init();
 		},
@@ -171,7 +190,7 @@
 	$(window).load(function(){
 		main.loaded();
 
-		$('.datepicker').datepicker('option', 'minDate', 3);
+		//$('.datepicker').datepicker('option', 'minDate', 3);
 		
 		if(window.location.hash == '#terms-and-conditions') {
 		  $('.footer-text a').click();

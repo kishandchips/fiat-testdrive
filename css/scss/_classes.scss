@@ -2,6 +2,11 @@
    Backgrounds
    ========================================================================== */
 
+img {
+	max-width: 100%;
+	height: auto;
+}
+
 .red-bg {
 	background-color: #c11d2d;
 }
@@ -532,7 +537,7 @@ menu, ol, ul {
 }
 
 .container {
-	max-width: 630px;
+	max-width: 700px;
 	margin-left: auto;
 	margin-right: auto;
 	position: relative;
@@ -672,7 +677,12 @@ $total_columns: length($columns);
    Gravity
    ========================================================================== */   
 
+.gform_wrapper.gf_browser_chrome .gfield_checkbox li input[type=checkbox] {
+		margin-top: 2px !important;
+	}
+
 .gform_wrapper {
+
 
 	.span {
 		&.five {
@@ -718,13 +728,12 @@ $total_columns: length($columns);
 	.hideradio input[type="radio"] {
 		display:none;
 	}
-	
-
 
 	ul {
 		li.gfield {
-			clear: none;
+			clear: none !important;
 			margin: 15px 0;
+			@extend .clearfix;
 
 			&.gfield_error.span {
 				width: 100%;
@@ -736,9 +745,35 @@ $total_columns: length($columns);
 					li {
 						width: 25%;
 						float: left;
+						@include box-sizing(border-box);
+						border: 1px solid #cecece;
 
-						@include device-width(5) {
+						&:nth-child(4n+1) {
+							clear: left;
+
+								@include device-width(6) {
+								clear: none;
+							}						
+						}
+
+						@include device-width(6) {
+							width: 33.33%;
+
+							&:nth-child(3n+1) {
+								clear: left;
+							}
+						}						
+
+						@include device-width(4) {
 							width: 50%;
+
+							&:nth-child(3n+1) {
+								clear: none;
+							}	
+
+							&:nth-child(2n+1) {
+								clear: left;
+							}													
 						}				
 
 						input[type="radio"]+label span {
@@ -748,6 +783,7 @@ $total_columns: length($columns);
 							color: #333333;
 							text-transform: uppercase;
 							font-family: sans-serif;
+							min-height: 36px;
 						}
 
 						label img {
@@ -756,9 +792,8 @@ $total_columns: length($columns);
 
 						input[type="radio"]+label img {
 							opacity: 0.6;
-							max-width: 100%;
+							max-width: 97%;
 							height: auto;
-							border: 1px solid #cecece;
 
 							@include device-width(5) {
 								max-width: 99%;
@@ -774,6 +809,7 @@ $total_columns: length($columns);
 						label {
 							margin: 0;
 							padding: 0;
+							text-align: center;
 
 							&:hover {
 								img {
@@ -813,12 +849,13 @@ $total_columns: length($columns);
 				.icon {
 					position: absolute;
 					top: -30px;
-					left: 41%;
+					left: 50%;
 					font-size: 35px;
 					background: #FFF;
 					@include border-radius(50%);
 					border: 3px solid #96172e;
 					width: 42px;					
+					margin-left: -22px;
 				}
 
 				.gfield_radio {
@@ -888,6 +925,10 @@ $total_columns: length($columns);
 		padding: 45px 0 15px;
 		clear: both !important;
 
+		&:last-child {
+			border-bottom: 1px solid #efefef;
+		}
+
 
 		&:first-child {
 			border-top: none;
@@ -939,7 +980,7 @@ $total_columns: length($columns);
 		}
 
 		&:after {
-			left: 100%;
+			left: 98%;
 			border: solid transparent;
 			content: " ";
 			height: 0;
@@ -1129,3 +1170,41 @@ $total_columns: length($columns);
 	/* Scroller Support */
 	.selecter .selecter-options.scroller { overflow: hidden; }
 	.selecter .selecter-options.scroller .scroller-content { max-height: 260px; padding: 0; }
+
+	.fade-in {
+	@include animation(fade-in 0.3s 0.5s ease);
+}
+
+.fade-out {
+	@include animation(fade-out 0.3s 0.5s ease);
+}
+
+@-webkit-keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+          animation-name: fadeIn;
+}
+
+@-webkit-keyframes fadeOut {
+  0% {opacity: 1;}
+  100% {opacity: 0;}
+}
+
+@keyframes fadeOut {
+  0% {opacity: 1;}
+  100% {opacity: 0;}
+}
+
+.fadeOut {
+  -webkit-animation-name: fadeOut;
+          animation-name: fadeOut;
+}

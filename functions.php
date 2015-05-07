@@ -12,6 +12,16 @@
  * @since fiat 1.0
  */
 
+$template_directory = get_template_directory();
+
+$template_directory_uri = get_template_directory_uri();
+
+
+add_action( 'wp_enqueue_scripts', 'custom_scripts', 50);
+
+add_action( 'wp_print_styles', 'custom_styles', 30);
+
+
 if ( ! function_exists( 'fiat_setup' ) ):
 /**
  * Sets up theme defaults and registers support for various WordPress features.
@@ -24,6 +34,8 @@ if ( ! function_exists( 'fiat_setup' ) ):
  */
 function fiat_setup() {
 
+	require( get_template_directory() . '/inc/classes/bfi-thumb.php' );
+
 	require( get_template_directory() . '/inc/shortcodes.php' );
 
 	register_nav_menus( array(
@@ -35,6 +47,28 @@ function fiat_setup() {
 }
 endif; // fiat_setup
 add_action( 'after_setup_theme', 'fiat_setup' );
+
+function custom_scripts() {
+	global $template_directory_uri;
+
+	
+	wp_enqueue_script('jquery');
+	wp_enqueue_script('modernizr', $template_directory_uri.'/js/libs/modernizr.min.js');
+	wp_enqueue_script('owlcarousel', $template_directory_uri.'/js/plugins/jquery.owlcarousel.js', array('jquery'), '', true);
+	wp_enqueue_script('easing', get_template_directory_uri().'/js/plugins/jquery.easing.js');
+	wp_enqueue_script('actual', get_template_directory_uri().'/js/plugins/jquery.actual.js', array('jquery'), '', true);		
+	wp_enqueue_script('selecter', get_template_directory_uri().'/js/plugins/jquery.fs.selecter.min.js');
+	wp_enqueue_script('main', get_template_directory_uri().'/js/main.js');	
+}
+
+
+function custom_styles() {
+	global $wp_styles, $template_directory_uri;
+
+	wp_enqueue_style( 'style', $template_directory_uri . '/css/style.css' );	
+	wp_enqueue_style( 'fonts', '//fast.fonts.net/cssapi/0513edcc-1270-4163-b2a9-7f909888318d.css' );	
+}
+
 
 add_action('tiny_mce_before_init', 'custom_tinymce_options');
 if ( ! function_exists( 'custom_tinymce_options' )) {
@@ -58,7 +92,7 @@ function custom_gform_standard_settings($position, $form_id){
     }
 }
 
-add_action('gform_enqueue_scripts',"custom_gform_enqueue_scripts", 10, 2);
+//add_action('gform_enqueue_scripts',"custom_gform_enqueue_scripts", 10, 2);
 function custom_gform_enqueue_scripts($form, $is_ajax=false){
     ?>
 <script>
@@ -176,4 +210,24 @@ function generate_xml($entry, $form) {
     }else{
                     return "File cannot be opened";
     }	
+}
+
+if(!function_exists('get_post_thumbnail_src')) {
+	function get_post_thumbnail_src($size = 'thumbnail'){
+		global $post;
+		$thumbnail_id = get_post_thumbnail_id();
+		return get_image($thumbnail_id, $size);
+	}
+}
+
+if(!function_exists('get_image')) {
+	function get_image($id, $size = 'thumbnail'){
+		
+		if( is_array($size) ) $size['bfi_thumb'] = true;
+
+		$image = wp_get_attachment_image_src($id, $size);
+
+		if( !empty($image[0]) ) return $image[0];
+		return;
+	}
 }

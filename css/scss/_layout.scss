@@ -85,13 +85,19 @@ body {
 	#main {
 		position: relative;
 
-		.bg-montage {
-			position: absolute;
-			height: 282px;
-			width: 100%;
-			background: url('../images/backgrounds/montage.jpg') center center no-repeat;
-			z-index: 0;
-			top: 20%;
+		// .bg-montage {
+		// 	position: absolute;
+		// 	height: 282px;
+		// 	width: 100%;
+		// 	background: url('../images/backgrounds/montage.jpg') center center no-repeat;
+		// 	z-index: 0;
+		// 	top: 20%;
+		// }
+
+		.carousel {
+			max-width: 1680px;
+			margin: 0 auto;
+			margin-bottom: 5em;
 		}
 
 		#page {
@@ -149,29 +155,29 @@ body {
 			position: relative;
 			height:100%;
 
-			.car-left {
-				position: absolute;
-				left: -15%;
-				top: -10%;
-				width: 37%;
-				height: 37%;
-				background-image: url('../images/backgrounds/car-bottom-left.png');
-				background-size: contain;
-				background-repeat: no-repeat;
+			// .car-left {
+			// 	position: absolute;
+			// 	left: -15%;
+			// 	top: -10%;
+			// 	width: 37%;
+			// 	height: 37%;
+			// 	background-image: url('../images/backgrounds/car-bottom-left.png');
+			// 	background-size: contain;
+			// 	background-repeat: no-repeat;
 
-			}
+			// }
 
-			.car-right {
-				position: absolute;
-				right: 0;
-				bottom: 0px;
-				width: 30%;
-				height: 53%;
-				background: url('../images/backgrounds/car-bottom-right.png');
-				background-size: contain;
-				background-repeat: no-repeat;
-				background-position: left bottom;
-			}				
+			// .car-right {
+			// 	position: absolute;
+			// 	right: 0;
+			// 	bottom: 0px;
+			// 	width: 30%;
+			// 	height: 53%;
+			// 	background: url('../images/backgrounds/car-bottom-right.png');
+			// 	background-size: contain;
+			// 	background-repeat: no-repeat;
+			// 	background-position: left bottom;
+			// }				
 		}
 	}	
 		
