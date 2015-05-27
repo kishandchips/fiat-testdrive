@@ -130,15 +130,15 @@ function generate_xml($entry, $form) {
 			<EmailAddress>'.$entry['21'].'</EmailAddress>
 			<TelephoneNumber>'.$entry['13'].'</TelephoneNumber>
 			<MobileNumber>'.$entry['14'].'</MobileNumber>
-			<PreferredDate>'.$entry['22'].'</PreferredDate>
 			<Model>'.$entry['15'].'</Model>
 			<FuelType>'.$entry['16'].'</FuelType>
-			<TypeofGearBox>'.$entry['17'] . $entry['24'].'</TypeofGearBox>
 			<CurrentCarRegistrationNumber>'.$entry['18'].'</CurrentCarRegistrationNumber>
 			<UseOfDataPost>'.$entry['23.1'].'</UseOfDataPost>
 			<UseOfDataTelephone>'.$entry['23.2'].'</UseOfDataTelephone>
 			<UseOfDataEmail>'.$entry['23.3'].'</UseOfDataEmail>
 			<UseOfDataSMS>'.$entry['23.4'].'</UseOfDataSMS>
+			<OfficeUseOnlyEmail>'.$entry['24'].'</OfficeUseOnlyEmail>
+			<CustomerCode>'.$entry['25'].'</CustomerCode>
 		</TestDriveBookingFiat>
 	</TestDriveBookingsFiat>
 	';
@@ -166,50 +166,48 @@ function generate_xml($entry, $form) {
  	curl_close($curl);
 
 
-	// Uploading files to Booking sistem FTP at SiSo
-	$credentials = array(
-	        'sisofiatdata14',
-	        'hibhg0zon!$'
-	);
-	$remoteurl = 'https://fiat.siso.co/data_uploads/';
-	$filename = 'entry_'.$entry['id'].'.xml';
+	// // Uploading files to Booking system FTP at SiSo
+	// $credentials = array(
+	//         'sisofiatdata14',
+	//         'hibhg0zon!$'
+	// );
+	// $remoteurl = 'https://fiat.siso.co/data_uploads/';
+	// $filename = 'entry_'.$entry['id'].'.xml';
 
 
-    if(is_readable($location)){
-    				echo $location;
-    				echo $filename;
-                    $filesize = filesize($location);
-                    $fh = fopen($location, 'rb');
+ //    if(is_readable($location)){
+ //                    $filesize = filesize($location);
+ //                    $fh = fopen($location, 'rb');
                    
-                    $ch = curl_init($remoteurl);
+ //                    $ch = curl_init($remoteurl);
                    
-                    // Set the authentication mode and login credentials
-                    curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
-					curl_setopt($ch, CURLOPT_USERPWD, implode(':', $credentials));                    
+ //                    // Set the authentication mode and login credentials
+ //                    curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_ANY);
+	// 				curl_setopt($ch, CURLOPT_USERPWD, implode(':', $credentials));                    
                    
-                    // Execute the request, upload the file
-                    curl_setopt($ch, CURLOPT_URL, $remoteurl.$filename);
+ //                    // Execute the request, upload the file
+ //                    curl_setopt($ch, CURLOPT_URL, $remoteurl.$filename);
                    
-                    // Define that we are going to upload a file, by setting CURLOPT_PUT we are
-                    // forced to set CURLOPT_INFILE and CURLOPT_INFILESIZE as well.
-                    curl_setopt($ch, CURLOPT_PUT, true);
+ //                    // Define that we are going to upload a file, by setting CURLOPT_PUT we are
+ //                    // forced to set CURLOPT_INFILE and CURLOPT_INFILESIZE as well.
+ //                    curl_setopt($ch, CURLOPT_PUT, true);
                    
-                    curl_setopt($ch, CURLOPT_INFILE, $fh);
+ //                    curl_setopt($ch, CURLOPT_INFILE, $fh);
                    
-                    curl_setopt($ch, CURLOPT_INFILESIZE, $filesize);
+ //                    curl_setopt($ch, CURLOPT_INFILESIZE, $filesize);
                    
-                    curl_setopt($ch, CURLOPT_BINARYTRANSFER, true); // --data-binary
+ //                    curl_setopt($ch, CURLOPT_BINARYTRANSFER, true); // --data-binary
                    
-                    // Execute the request, upload the file
-                    $success = curl_exec($ch);
+ //                    // Execute the request, upload the file
+ //                    $success = curl_exec($ch);
                    
-                    // Close the file handle
-                    fclose($fh);
+ //                    // Close the file handle
+ //                    fclose($fh);
                    
-                    return ($success)?"Uploaded":"Error: ".curl_error($ch);               
-    }else{
-                    return "File cannot be opened";
-    }	
+ //                    return ($success)?"Uploaded":"Error: ".curl_error($ch);               
+ //    }else{
+ //                    return "File cannot be opened";
+ //    }	    
 }
 
 if(!function_exists('get_post_thumbnail_src')) {
