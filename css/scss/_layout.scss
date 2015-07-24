@@ -45,13 +45,21 @@ body {
 	margin-bottom: 17px;
 
 	#logo {
-		width: 91px;
-		height: 90px;
+		height: 111px;
 		overflow: hidden;
-		text-indent: -9999px;
 		display: block;
-		background: url('../images/logos/header_logo.png') center center no-repeat;
+		//background: url('../images/logos/header_logo.png') center center no-repeat;
 		margin: 17px auto 30px;
+
+		a {
+			@include inline-block;
+			padding: 11px 20px;
+			border-right: 2px solid #171717;
+
+			&:last-child {
+				border-right: none;
+			}
+		}
 	}
 
 	.tagline {

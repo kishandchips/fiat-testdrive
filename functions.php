@@ -78,6 +78,8 @@ if ( ! function_exists( 'custom_tinymce_options' )) {
 	}
 }
 
+if( function_exists('acf_add_options_page') ) acf_add_options_page();	
+
 add_image_size( 'header_image', 630, 323, true);
 
 add_action("gform_field_standard_settings", "custom_gform_standard_settings", 10, 2);

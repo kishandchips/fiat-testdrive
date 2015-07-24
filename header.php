@@ -22,9 +22,19 @@
 		<div class="wrap-inner clearfix">
 		<header id="header" role="banner">
 			<div class="container">
-				<a id="logo" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home">
-					<?php bloginfo( 'name' ); ?>
-				</a>
+				<div id="logo">
+					<?php
+						if( have_rows('page_logos', 'options') ):
+						    while ( have_rows('page_logos', 'options') ) : the_row(); ?>
+
+								<a href="<?php the_sub_field('logo_url'); ?>">
+									<img src="<?php the_sub_field('logo'); ?>" alt="">
+								</a>
+						    <?php endwhile;
+
+						endif;
+					?>				
+				</div>
 				<h1 class="title">
 					<?php bloginfo( 'name' ); ?>
 				</h1>
